@@ -34,13 +34,13 @@ namespace API_Examen
                     .HasColumnName("id");
 
                 entity.Property(e => e.CreatedAt)
-                    .HasColumnType("timestamp without time zone")
+                    .HasColumnType("timestamp with time zone")
                     .HasColumnName("created_at");
 
                 entity.Property(e => e.PropertyId).HasColumnName("property_id");
 
                 entity.Property(e => e.Schedule)
-                    .HasColumnType("timestamp without time zone")
+                    .HasColumnType("timestamp with time zone")
                     .HasColumnName("schedule");
 
                 entity.Property(e => e.Status)
@@ -52,7 +52,7 @@ namespace API_Examen
                     .HasColumnName("title");
 
                 entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("timestamp without time zone")
+                    .HasColumnType("timestamp with time zone")
                     .HasColumnName("updated_at");
 
                 entity.HasOne(d => d.Property)
@@ -73,13 +73,13 @@ namespace API_Examen
                 entity.Property(e => e.Address).HasColumnName("address");
 
                 entity.Property(e => e.CreatedAt)
-                    .HasColumnType("timestamp without time zone")
+                    .HasColumnType("timestamp with time zone")
                     .HasColumnName("created_at");
 
                 entity.Property(e => e.Description).HasColumnName("description");
 
                 entity.Property(e => e.DisabeledAt)
-                    .HasColumnType("timestamp without time zone")
+                    .HasColumnType("timestamp with time zone")
                     .HasColumnName("disabeled_at");
 
                 entity.Property(e => e.Status)
@@ -91,7 +91,7 @@ namespace API_Examen
                     .HasColumnName("title");
 
                 entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("timestamp without time zone")
+                    .HasColumnType("timestamp with time zone")
                     .HasColumnName("updated_at");
             });
 
@@ -110,7 +110,7 @@ namespace API_Examen
                     .HasColumnName("answers");
 
                 entity.Property(e => e.CreatedAt)
-                    .HasColumnType("timestamp without time zone")
+                    .HasColumnType("timestamp with time zone")
                     .HasColumnName("created_at");
 
                 entity.HasOne(d => d.Activity)

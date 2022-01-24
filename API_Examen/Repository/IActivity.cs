@@ -1,12 +1,15 @@
 ﻿
+using API_Examen.DTO;
+using Microsoft.AspNetCore.Mvc;
+
 namespace API_Examen.Repository
 {
     public interface IActivity
     {
         public IEnumerable<Object> GetActivities();
         public void CancelActivities(int Id);
-        public void RescheduleActivities(int Id);
-        public void AddActivities(Activity activity);
+        public string RescheduleActivities(int Id, DateTime Fecha);
+        public string AddActivities(ActivityDTO activity);
         public Activity GetActivity(int Id);
 
     }

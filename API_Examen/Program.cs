@@ -16,6 +16,7 @@ builder.Services.AddDbContext<ActivitiesDbContext>(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 app.UseHttpsRedirection();
 
