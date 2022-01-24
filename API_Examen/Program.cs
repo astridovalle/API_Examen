@@ -1,4 +1,5 @@
 using API_Examen;
+using API_Examen.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,9 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IActivity, ActivityRepo>();
 
 builder.Services.AddDbContext<ActivitiesDbContext>(options =>
-        options.UseNpgsql(builder.Configuration.GetConnectionString("BloggingContext")));
+        options.UseNpgsql(builder.Configuration.GetConnectionString("ActivitiesCon")));
 
 
 var app = builder.Build();

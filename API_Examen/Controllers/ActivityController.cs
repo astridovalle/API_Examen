@@ -1,14 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using API_Examen.Repository;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API_Examen.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ActivityController : Controller
+    public class ActivityController : ControllerBase
     {
-        public IActionResult Index()
+        public IActivity _ActivityRepo;
+        public ActivityController(IActivity activity)
         {
-            return View();
+            _ActivityRepo = activity;   
         }
+
+        [HttpGet("/GetActivities")]
+        public ActionResult<IEnumerable<Object>> GetActivities()
+        {
+            return _ActivityRepo.GetActivities().ToList();
+        }
+
     }
 }
