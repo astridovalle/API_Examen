@@ -24,46 +24,6 @@ namespace API_Examen.Persistence.Migrations
             NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "pg_stat_statements");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("API_Examen.Activity", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.Property<int>("PropertyId")
-                        .HasColumnType("integer")
-                        .HasColumnName("property_id");
-
-                    b.Property<DateTime>("Schedule")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("schedule");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("character varying(35)")
-                        .HasColumnName("status");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
-                        .HasColumnName("title");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_at");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PropertyId");
-
-                    b.ToTable("activity", (string)null);
-                });
 
             modelBuilder.Entity("API_Examen.Models.User", b =>
                 {
@@ -135,77 +95,6 @@ namespace API_Examen.Persistence.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("API_Examen.Property", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("address");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("description");
-
-                    b.Property<DateTime?>("DisabeledAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("disabeled_at");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("character varying(35)")
-                        .HasColumnName("status");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
-                        .HasColumnName("title");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_at");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("property", (string)null);
-                });
-
-            modelBuilder.Entity("API_Examen.Survey", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    b.Property<int>("ActivityId")
-                        .HasColumnType("integer")
-                        .HasColumnName("activity_id");
-
-                    b.Property<string>("Answers")
-                        .IsRequired()
-                        .HasColumnType("json")
-                        .HasColumnName("answers");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ActivityId");
-
-                    b.ToTable("survey", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -340,27 +229,8 @@ namespace API_Examen.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("API_Examen.Activity", b =>
-                {
-                    b.HasOne("API_Examen.Property", "Property")
-                        .WithMany("Activities")
-                        .HasForeignKey("PropertyId")
-                        .IsRequired()
-                        .HasConstraintName("fk_property");
+          
 
-                    b.Navigation("Property");
-                });
-
-            modelBuilder.Entity("API_Examen.Survey", b =>
-                {
-                    b.HasOne("API_Examen.Activity", "Activity")
-                        .WithMany("Surveys")
-                        .HasForeignKey("ActivityId")
-                        .IsRequired()
-                        .HasConstraintName("fk_activity");
-
-                    b.Navigation("Activity");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
@@ -413,15 +283,6 @@ namespace API_Examen.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("API_Examen.Activity", b =>
-                {
-                    b.Navigation("Surveys");
-                });
-
-            modelBuilder.Entity("API_Examen.Property", b =>
-                {
-                    b.Navigation("Activities");
-                });
 #pragma warning restore 612, 618
         }
     }

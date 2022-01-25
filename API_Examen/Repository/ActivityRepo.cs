@@ -85,6 +85,11 @@ namespace API_Examen.Repository
             return context.Activities.Where(x => x.Id == Id).FirstOrDefault();
         }
 
+        public IEnumerable<Property> GetProperties()
+        {
+            return context.Properties.ToList();
+        }
+
         public string RescheduleActivities(int Id, DateTime Fecha)
         {
             var act = context.Activities.Where(x => x.Id == Id).FirstOrDefault();

@@ -55,23 +55,7 @@ namespace API_Examen.Persistence.Migrations
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "property",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false),
-                    title = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    address = table.Column<string>(type: "text", nullable: false),
-                    description = table.Column<string>(type: "text", nullable: false),
-                    created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    disabeled_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    status = table.Column<string>(type: "character varying(35)", maxLength: 35, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_property", x => x.id);
-                });
+        
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
@@ -179,52 +163,10 @@ namespace API_Examen.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "activity",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false),
-                    property_id = table.Column<int>(type: "integer", nullable: false),
-                    schedule = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    title = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    status = table.Column<string>(type: "character varying(35)", maxLength: 35, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_activity", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_property",
-                        column: x => x.property_id,
-                        principalTable: "property",
-                        principalColumn: "id");
-                });
+         
 
-            migrationBuilder.CreateTable(
-                name: "survey",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false),
-                    activity_id = table.Column<int>(type: "integer", nullable: false),
-                    answers = table.Column<string>(type: "json", nullable: false),
-                    created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_survey", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_activity",
-                        column: x => x.activity_id,
-                        principalTable: "activity",
-                        principalColumn: "id");
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_activity_property_id",
-                table: "activity",
-                column: "property_id");
-
+         
+         
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -262,10 +204,6 @@ namespace API_Examen.Persistence.Migrations
                 column: "NormalizedUserName",
                 unique: true);
 
-            migrationBuilder.CreateIndex(
-                name: "IX_survey_activity_id",
-                table: "survey",
-                column: "activity_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -285,20 +223,11 @@ namespace API_Examen.Persistence.Migrations
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
 
-            migrationBuilder.DropTable(
-                name: "survey");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "activity");
-
-            migrationBuilder.DropTable(
-                name: "property");
-        }
+                name: "AspNetUsers");        }
     }
 }

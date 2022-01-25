@@ -38,6 +38,8 @@ builder.Services
         };
     });
 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -45,6 +47,7 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
