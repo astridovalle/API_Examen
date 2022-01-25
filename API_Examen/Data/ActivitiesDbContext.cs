@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using API_Examen.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace API_Examen
 {
-    public partial class ActivitiesDbContext : DbContext
+    public partial class ActivitiesDbContext : IdentityDbContext<User>
     {
         public ActivitiesDbContext()
         {
@@ -121,6 +123,7 @@ namespace API_Examen
             });
 
             OnModelCreatingPartial(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
