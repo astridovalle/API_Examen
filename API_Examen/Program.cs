@@ -7,12 +7,23 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<IActivity, ActivityRepo>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      builder =>
+                      {
+                          builder.WithOrigins("https://apiexamen.azurewebsites.net").AllowAnyMethod().AllowAnyHeader();
+                      });
+});
+
 
 builder.Services.AddDbContext<ActivitiesDbContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("ActivitiesCon")))
@@ -46,6 +57,7 @@ var app = builder.Build();
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 app.UseHttpsRedirection();
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthentication();
 app.UseAuthorization();
